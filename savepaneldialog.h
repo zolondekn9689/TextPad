@@ -2,6 +2,11 @@
 #define SAVEPANELDIALOG_H
 
 #include <QDialog>
+#include <QRegExpValidator>
+#include <QFile>
+#include <QDebug>
+#include <QMessageBox>
+#include <QFileSystemModel>
 
 namespace Ui {
 class SavePanelDialog;
@@ -18,9 +23,13 @@ public:
 private slots:
     void on_buttonBox_accepted();
 
+    void on_treeView_clicked(const QModelIndex &index);
+
 private:
     Ui::SavePanelDialog *ui;
     QString curText;
+    QFileSystemModel* directory;
+    QString prefix = "";
 };
 
 #endif // SAVEPANELDIALOG_H

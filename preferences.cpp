@@ -17,10 +17,9 @@ Preferences* Preferences::getInstance()
     return inst_;
 }
 
-
-
 //FOLLOWING BELLOW THIS POINT ARE GETTERS AND SETTERS.
-void Preferences::setTabWidth(int width) {
+void Preferences::setTabWidth(int width)
+{
     this->tabWidth = width;
 }
 
