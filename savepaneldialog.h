@@ -7,6 +7,7 @@
 #include <QDebug>
 #include <QMessageBox>
 #include <QFileSystemModel>
+#include <QPrinter>
 
 namespace Ui {
 class SavePanelDialog;
@@ -19,6 +20,9 @@ class SavePanelDialog : public QDialog
 public:
     explicit SavePanelDialog(QWidget *parent = nullptr, QString text = "");
     ~SavePanelDialog();
+
+    void convertIntoText();
+    void convertIntoPDF();
 
 private slots:
     void on_buttonBox_accepted();

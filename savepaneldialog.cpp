@@ -1,6 +1,6 @@
 #include "savepaneldialog.h"
 #include "ui_savepaneldialog.h"
-
+#include <QTextDocument>
 
 SavePanelDialog::SavePanelDialog(QWidget *parent, QString text) :
     QDialog(parent),
@@ -58,11 +58,25 @@ void SavePanelDialog::on_buttonBox_accepted()
         return;
     }
 
+    switch (ui->comboBox->currentIndex())
+    {
+    case 0:
+        convertIntoText();
+        break;
+    case 1:
+        convertIntoPDF();
+        break;
+    }
+
+}
+
+void SavePanelDialog::convertIntoText() {
     //The name of the file with extension that will be saved.
      QString filename = ui->lineEdit->text() + "." + ui->comboBox->currentText();
 
     //Have a file name.
      QFile file;
+
 
     //Check to see if prefix is empty.
     if (!prefix.isEmpty())
@@ -92,6 +106,38 @@ void SavePanelDialog::on_buttonBox_accepted()
 
     //Close the file
     file.close();
+}
+void SavePanelDialog::convertIntoPDF()
+{
+    QPrinter printer(QPrinter::HighResolution);
+    printer.setOutputFormat(QPrinter::PdfFormat);
+    //printer.setPaperSize(QPrinter::A4);
+    QTextDocument document(curText);
+
+    QString filename = "";
+
+
+
+    //Check to see if prefix is empty.
+    if (prefix.isEmpty())
+    {
+        //Create a file.
+        filename = ui->lineEdit->text() + ".pdf";
+        printer.setOutputFileName(filename);
+    } else {
+        //Set file name.
+        filename = prefix + "/" + ui->lineEdit->text() + ".pdf";
+        printer.setOutputFileName(filename);
+    }
+
+    qDebug() << filename;
+    qDebug() << prefix;
+
+    document.setPlainText(curText);
+    document.print(&printer);
+
+
+
 }
 
 void SavePanelDialog::on_treeView_clicked(const QModelIndex &index)
