@@ -7,6 +7,10 @@
 #include <QSpinBox>
 #include "preferences.h"
 #include <QTextCursor>
+#include <QClipboard>
+#include <QtPrintSupport/QAbstractPrintDialog>
+#include <QtPrintSupport/QPrintDialog>
+#include <QtPrintSupport/QPrinter>
 
 
 
@@ -34,7 +38,23 @@ private slots:
 
     void on_actionClear_All_triggered();
 
-    void on_actionSave_triggered();
+    void on_actionSave_As_triggered();
+
+    void on_actionUndo_triggered();
+
+    void on_actionCopy_triggered();
+
+    void on_actionPaste_triggered();
+
+    void on_actionCut_triggered();
+
+    void on_actionDelete_triggered();
+
+    void on_actionRedo_triggered();
+
+    void on_actionFind_triggered();
+
+    void on_actionPrint_2_triggered();
 
 private:
     Ui::MainWindow *ui;
